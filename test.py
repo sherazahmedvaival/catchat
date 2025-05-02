@@ -1,4 +1,5 @@
-print(13)
+import os
+
 command = input("Enter a command to execute: ")
 os.system(command)
 
