@@ -70,7 +70,8 @@ def disconnect():
 @chat_bp.route('/')
 def home():
     amount = current_app.config['CATCHAT_MESSAGE_PER_PAGE']
-    messages = Message.query.order_by(Message.timestamp.asc())[-amount:]
+    messages = (Message.query.order_by(Message.timestamp.desc())
+                .limit(amount).all()[::-1])
     user_amount = User.query.count()
     return render_template('chat/home.html', messages=messages, user_amount=user_amount)
 
